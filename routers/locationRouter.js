@@ -17,6 +17,14 @@ const createLocationRouter = (dbConnection) => {
     res.status(201).json({ id: rows[0].location_id });
   });
 
+  router.delete("/:id", async (req, res) => {
+    const id = req.params.id;
+    await dbConnection.QueryData(
+      `DELETE FROM locations WHERE location_id=${id}`
+    );
+    res.json({ message: "DELETED" });
+  });
+
   return router;
 };
 
