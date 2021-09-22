@@ -8,7 +8,11 @@ const conn_params = {
 const getReservationsQuery = (place_id) =>
     `SELECT * FROM reservations where place_id=${place_id}`;
 
+const getCourseQuery = (course_id) =>
+    `SELECT * FROM courses where course_id=${course_id}`;
+
 module.exports = {
     conn_params,
     getReservationsQuery,
+    getCourseQuery,
 };
