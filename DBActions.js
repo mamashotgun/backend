@@ -2,17 +2,12 @@ const {
     Pool,
     Client
 } = require('pg');
+const config = require('../config/sqlConfig');
 
 module.exports = class DatabaseActions {
     constructor() {
         this.pool = new Pool();
-        this.client = new Client({
-            user: 'postgres',
-            password: 'Password1',
-            host: '172.20.10.4',
-            port: '5432',
-            database: 'Shotgun'
-        })
+        this.client = new Client(config.conn_params);
         this.client.connect();
     }
 
