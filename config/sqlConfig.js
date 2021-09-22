@@ -6,7 +6,7 @@ const conn_params = {
     database: "Shotgun",
 };
 const getReservationsQuery = (place_id) =>
-    `SELECT reservation_id, start_time, end_time, display_name FROM reservations r JOIN courses c ON r.course_id = c.course_id WHERE r.place_id = ${place_id}`;
+  `SELECT reservation_id, c.course_id, is_admin, start_time, end_time, display_name FROM reservations r JOIN courses c ON r.course_id = c.course_id WHERE r.place_id = ${place_id}`;
 
 const createReservationQuery = (place_id, course_id, start_time, end_time) =>
     `INSERT INTO reservations(place_id, course_id, start_time, end_time) VALUES (${place_id}, ${course_id}, '${start_time}', '${end_time}') RETURNING *`;
