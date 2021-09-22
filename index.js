@@ -14,7 +14,6 @@ app.use(
   "/reservations",
   reservationRouter.createReservationRouter(
     dbConnection,
-    reservationsMiddleware.createGetReservationsMiddleWare(dbConnection)
   )
 );
 app.use(

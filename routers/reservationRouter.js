@@ -1,11 +1,15 @@
 const express = require("express");
-const { createReservationQuery } = require("../config/sqlConfig");
+const { getReservationsQuery, createReservationQuery } = require("../config/sqlConfig");
 
-const createReservationRouter = (dbConnection, getReservationsMiddleware) => {
+const createReservationRouter = (dbConnection) => {
   const router = express.Router();
 
-  router.get("/", getReservationsMiddleware, (req, res) => {
-    res.json(res.reservations);
+  router.get("/", async (req, res) => {
+    const place_id = req.query.place_id;
+    const reservations = await dbConnection.QueryData(
+      getReservationsQuery(place_id)
+    );
+    res.json(reservations);
   });
 
   router.post("/", async (req, res) => {
