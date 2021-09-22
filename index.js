@@ -41,3 +41,8 @@ app.use(
 );
 
 app.listen(port, host, () => console.log(`listening on port ` + port));
+app.use(
+  "/categories",
+  categoriesRouter.createCourseRouter(dbConnection)
+);
+app.listen(port, host, () => console.log(`listening on port ` + port));
