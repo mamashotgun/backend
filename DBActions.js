@@ -1,22 +1,19 @@
-const {
-    Pool,
-    Client
-} = require('pg');
+const { Pool, Client } = require('pg');
 const config = require('../config/sqlConfig');
 
 module.exports = class DatabaseActions {
     constructor() {
-        this.pool = new Pool();
         this.client = new Client(config.conn_params);
-        this.client.connect();
-    }
-
-    GetConnection() {
-        return this.client.connect();
+        this.client.connect(err => {
+            if (err) {
+              console.error('connection error', err.stack)
+            } else {
+              console.log('connected')
+            }
+          })
     }
 
     async QueryData(query) {
-        // let conn = this.GetConnection();
         let data;
         await this.client.query(query)
             .then((res) => {
