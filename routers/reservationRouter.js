@@ -1,5 +1,8 @@
 const express = require("express");
-const { getReservationsQuery, createReservationQuery } = require("../config/sqlConfig");
+const {
+  getReservationsQuery,
+  createReservationQuery,
+} = require("../config/sqlConfig");
 
 const createReservationRouter = (dbConnection) => {
   const router = express.Router();
@@ -14,10 +17,24 @@ const createReservationRouter = (dbConnection) => {
 
   router.post("/", async (req, res) => {
     const { place_id, course_id, start_time, end_time } = req.body;
-    await dbConnection.QueryData(
+
+    const rows = await dbConnection.QueryData(
       createReservationQuery(place_id, course_id, start_time, end_time)
     );
-    res.status(201).send();
+
+    const id = rows[0].reservation_id;
+
+    res.status(201).json({
+      id,
+    });
+  });
+
+  router.delete("/:id", async (req, res) => {
+    const id = req.params.id;
+    await dbConnection.QueryData(
+      `DELETE FROM reservations WHERE reservation_id=${id}`
+    );
+    res.status(204).send();
   });
 
   return router;
