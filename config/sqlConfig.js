@@ -14,6 +14,15 @@ const createReservationQuery = (place_id, course_id, start_time, end_time) =>
 const getCourseQuery = (course_id) =>
     `SELECT * FROM courses where course_id=${course_id}`;
 
+const createPlacesQuery = (name, location_id, category_id) =>
+    `INSERT INTO places(name, location_id, category_id) VALUES('${name}', ${location_id}, ${category_id})`;
+
+const createPlacesQuery = (location_id) =>
+    `SELECT * FROM places where location_id=${location_id}`;
+
+const removePlacesQuery = (place_id) =>
+    `DELETE FROM places WHERE place_id = ${place_id};`
+
 const createCourseQuery = (name, password, is_admin, display_name) =>
     `INSERT INTO courses(name, password ,is_admin, display_name) VALUES ('${name}', '${password}', ${is_admin}, '${display_name}')`;
 
@@ -28,6 +37,8 @@ module.exports = {
     getReservationsQuery,
     getCourseQuery,
     createReservationQuery,
+    createPlacesQuery,
+    removePlacesQuery
     createCourseQuery,
     createCategoryQuery,
     getAllCategoriesQuery,
