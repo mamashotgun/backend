@@ -17,6 +17,15 @@ const getCourseQuery = (course_id) =>
 const createPlacesQuery = (name, location_id, category_id) =>
     `INSERT INTO places(name, location_id, category_id) VALUES('${name}', ${location_id}, ${category_id})`;
 
+const createPlacesQuery = (location_id) =>
+    `SELECT * FROM places where location_id=${location_id}`;
+
+const removePlacesQuery = (place_id) =>
+    `DELETE FROM places WHERE place_id = ${place_id};`
+
+const createCourseQuery = (name, password, is_admin, display_name) =>
+    `INSERT INTO courses(name, password ,is_admin, display_name) VALUES ('${name}', '${password}', ${is_admin}, '${display_name}')`;
+
 const getPlacesQuery = (location_id) =>
     `SELECT * FROM places where location_id=${location_id}`;
 
@@ -32,4 +41,7 @@ module.exports = {
     createPlacesQuery,
     removePlacesQuery,
     getPlacesQuery
+    createCourseQuery,
+    createCategoryQuery,
+    getAllCategoriesQuery,
 };
