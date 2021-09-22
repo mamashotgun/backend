@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const DB = require("./data/DBActions");
 const { port, host } = require("./config/appConfig");
 const reservationRouter = require("./routers/reservationRouter");
@@ -11,6 +12,7 @@ const app = express();
 const dbConnection = new DB();
 
 app.use(express.json());
+app.use(cors());
 app.use(
   "/reservations",
   reservationRouter.createReservationRouter(dbConnection)
