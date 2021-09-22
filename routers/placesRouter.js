@@ -10,10 +10,12 @@ const createPlacesRouter = (dbConnection) => {
 
   router.get("/", async (req, res) => {
     const location_id = req.query.location_id;
+    const category_id = req.query.category_id;
+
     if (!location_id) {
       res.status(400).json({ error: "No location id given!" });
     } else {
-      const places = await dbConnection.QueryData(getPlacesQuery(location_id));
+      const places = await dbConnection.QueryData(getPlacesQuery(location_id, category_id));
       res.json(places);
     }
   });
