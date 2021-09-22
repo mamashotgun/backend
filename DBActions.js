@@ -1,9 +1,9 @@
 const { Pool, Client } = require('pg');
 
-class QueryActions {
+class DatabaseActions {
     constructor() {
-        const pool = new Pool();
-        const client = new Client({
+        this.pool = new Pool();
+        this.client = new Client({
             user: 'postgres',
             password: 'Password1',
             host: '172.20.10.4:',
