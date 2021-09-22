@@ -1,9 +1,8 @@
-const express = require('express');
-const DB = require('./DBActions.js');
+const express = require("express");
+const DB = require("./DBActions.js");
+const { port, host } = require("./config/appConfig");
 
 const app = express();
-const port = 3000;
-const host = '0.0.0.0';
 
-app.get('/', (req, res) => res.send('Alive!'))
-app.listen(port, host, () => console.log(`listening on port ` + port))
+app.use(express.json());
+app.listen(port, host, () => console.log(`listening on port ` + port));
