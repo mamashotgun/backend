@@ -9,6 +9,7 @@ const { port, host } = require("./config/appConfig");
 const reservationRouter = require("./routers/reservationRouter");
 const coursesRouter = require("./routers/coursesRouter");
 const categoriesRouter = require("./routers/categoriesRouter");
+const placesRouter = require("./routers/placesRouter");
 
 
 const app = express();

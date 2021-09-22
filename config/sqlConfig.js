@@ -38,7 +38,7 @@ module.exports = {
     getCourseQuery,
     createReservationQuery,
     createPlacesQuery,
-    removePlacesQuery
+    removePlacesQuery,
     createCourseQuery,
     createCategoryQuery,
     getAllCategoriesQuery,
