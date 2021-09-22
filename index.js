@@ -1,10 +1,17 @@
 const express = require("express");
 const DB = require("./data/DBActions.js");
-const { port, host} = require("./config/appConfig");
+const { port, host } = require("./config/appConfig");
+const middleware = require("./middleware/reservations/getReservations");
+const reservationRouter = require("./routers/reservationRouter");
 
 const app = express();
-const port = 3000;
-const host = '0.0.0.0';
+const dbConnection = new DB();
 
 app.use(express.json());
+app.use(
+  "/reservations",
+  reservationRouter.createReservationRouter(
+    middleware.createGetReservationsMiddleWare(dbConnection)
+  )
+);
 app.listen(port, host, () => console.log(`listening on port ` + port));
