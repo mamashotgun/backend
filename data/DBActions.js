@@ -1,4 +1,4 @@
-const { Pool, Client } = require("pg");
+const { Client } = require("pg");
 
 module.exports = class DatabaseActions {
   constructor() {
