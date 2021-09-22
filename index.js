@@ -3,6 +3,7 @@ const DB = require("./data/DBActions.js");
 const { port, host } = require("./config/appConfig");
 const reservationRouter = require("./routers/reservationRouter");
 const coursesRouter = require("./routers/coursesRouter");
+const categoriesRouter = require("./routers/categoriesRouter");
 
 
 const app = express();
@@ -18,5 +19,9 @@ app.use(
 app.use(
   "/courses",
   coursesRouter.createCourseRouter(dbConnection)
+);
+app.use(
+  "/categories",
+  categoriesRouter.createCourseRouter(dbConnection)
 );
 app.listen(port, host, () => console.log(`listening on port ` + port));
