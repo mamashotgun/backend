@@ -5,6 +5,7 @@ const {
     host
 } = require("./config/appConfig");
 const reservationsMiddleware = require("./middleware/reservations/getReservations");
+const { port, host } = require("./config/appConfig");
 const reservationRouter = require("./routers/reservationRouter");
 const coursesRouter = require("./routers/coursesRouter");
 const categoriesRouter = require("./routers/categoriesRouter");
@@ -30,6 +31,13 @@ app.use(
 app.use(
     "/places",
     placesRouter.createPlacesRouter(dbConnection)
+);
+
+app.listen(port, host, () => console.log(`listening on port ` + port));
+
+app.use(
+  "/categories",
+  categoriesRouter.createCourseRouter(dbConnection)
 );
 
 app.listen(port, host, () => console.log(`listening on port ` + port));
