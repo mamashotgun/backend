@@ -7,6 +7,7 @@ const {
 const reservationsMiddleware = require("./middleware/reservations/getReservations");
 const reservationRouter = require("./routers/reservationRouter");
 const coursesRouter = require("./routers/coursesRouter");
+const categoriesRouter = require("./routers/categoriesRouter");
 
 
 const app = express();
@@ -30,4 +31,9 @@ app.use(
     placesRouter.createPlacesRouter(dbConnection)
 );
 
+app.listen(port, host, () => console.log(`listening on port ` + port));
+app.use(
+  "/categories",
+  categoriesRouter.createCourseRouter(dbConnection)
+);
 app.listen(port, host, () => console.log(`listening on port ` + port));
