@@ -4,4 +4,4 @@ const port = 3000
 const host = '0.0.0.0'
 
 app.get('/', (req, res) => res.send('Alive!'))
-app.listen(port, host, () => console.log(`listening on port ` +port))
+app.listen(port, host, () => console.log(`listening on port ` + port))
