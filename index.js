@@ -1,5 +1,5 @@
 const express = require("express");
-const DB = require("./DBActions.js");
+const DB = require("./data/DBActions.js");
 const { port, host } = require("./config/appConfig");
 
 const app = express();
