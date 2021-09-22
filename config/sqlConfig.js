@@ -17,6 +17,11 @@ const getCourseQuery = (course_id) =>
 const createCourseQuery = (name, password, is_admin, display_name) =>
     `INSERT INTO courses(name, password ,is_admin, display_name) VALUES ('${name}', '${password}', ${is_admin}, '${display_name}')`;
 
+const createCategoryQuery = (name) =>
+    `INSERT INTO categories(name) VALUES ('${name}')`;
+
+const getAllCategoriesQuery = () =>
+    `SELECT * FROM categories`;
 
 module.exports = {
     conn_params,
@@ -24,4 +29,6 @@ module.exports = {
     getCourseQuery,
     createReservationQuery,
     createCourseQuery,
+    createCategoryQuery,
+    getAllCategoriesQuery,
 };
