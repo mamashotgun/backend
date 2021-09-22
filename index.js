@@ -13,6 +13,7 @@ app.use(express.json());
 app.use(
   "/reservations",
   reservationRouter.createReservationRouter(
+    dbConnection,
     reservationsMiddleware.createGetReservationsMiddleWare(dbConnection)
   )
 );

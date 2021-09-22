@@ -8,6 +8,9 @@ const conn_params = {
 const getReservationsQuery = (place_id) =>
     `SELECT * FROM reservations where place_id=${place_id}`;
 
+const createReservationQuery = (place_id, course_id, start_time, end_time) =>
+    `INSERT INTO reservations(place_id, course_id, start_time, end_time) VALUES (${place_id}, ${course_id}, '${start_time}', '${end_time}')`;
+
 const getCourseQuery = (course_id) =>
     `SELECT * FROM courses where course_id=${course_id}`;
 
@@ -15,4 +18,5 @@ module.exports = {
     conn_params,
     getReservationsQuery,
     getCourseQuery,
+    createReservationQuery
 };
