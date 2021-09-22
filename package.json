@@ -1,0 +1,23 @@
+{
+  "name": "mamashotgun_be",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mamashotgun/backend.git"
+  },
+  "author": "Mamashotgun Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mamashotgun/backend/issues"
+  },
+  "homepage": "https://github.com/mamashotgun/backend#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.7.1"
+  }
+}
