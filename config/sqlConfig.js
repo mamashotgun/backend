@@ -17,7 +17,7 @@ const getCourseQuery = (course_id) =>
 const createPlacesQuery = (name, location_id, category_id) =>
     `INSERT INTO places(name, location_id, category_id) VALUES('${name}', ${location_id}, ${category_id})`;
 
-const createPlacesQuery = (location_id) =>
+const getPlacesQuery = (location_id) =>
     `SELECT * FROM places where location_id=${location_id}`;
 
 const removePlacesQuery = (place_id) =>
@@ -30,5 +30,6 @@ module.exports = {
     getCourseQuery,
     createReservationQuery,
     createPlacesQuery,
-    removePlacesQuery
+    removePlacesQuery,
+    getPlacesQuery
 };
