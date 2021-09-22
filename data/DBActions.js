@@ -19,7 +19,6 @@ module.exports = class DatabaseActions {
   async QueryData(query) {
     let data;
     await this.client.query(query).then((res) => {
-      console.log(res.rows);
       data = res.rows;
     });
     return data;
