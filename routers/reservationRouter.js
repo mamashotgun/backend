@@ -13,8 +13,13 @@ const createReservationRouter = (dbConnection) => {
 
   router.get("/", async (req, res) => {
     const place_id = req.query.place_id;
-    const reservations = await getReservationsByPlace(place_id);
-    res.json(reservations);
+
+    if (!place_id) {
+      res.status(400).json({ message: "No place id given!" });
+    } else {
+      const reservations = await getReservationsByPlace(place_id);
+      res.json(reservations);
+    }
   });
 
   const isTimeAvailable = async (place_id, start_time, end_time) => {
