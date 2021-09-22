@@ -26,8 +26,8 @@ app.use(
 );
 
 app.use(
-    "/locations",
-    locationsRouter.createLocationsRouter(dbConnection)
+    "/places",
+    placesRouter.createPlacesRouter(dbConnection)
 );
 
 app.listen(port, host, () => console.log(`listening on port ` + port));
