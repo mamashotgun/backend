@@ -20,6 +20,9 @@ const createPlacesQuery = (name, location_id, category_id) =>
 const createPlacesQuery = (location_id) =>
     `SELECT * FROM places where location_id=${location_id}`;
 
+const removePlacesQuery = (place_id) =>
+    `DELETE FROM places WHERE place_id = ${place_id};`
+
 
 module.exports = {
     conn_params,
@@ -27,4 +30,5 @@ module.exports = {
     getCourseQuery,
     createReservationQuery,
     createPlacesQuery,
+    removePlacesQuery
 };
