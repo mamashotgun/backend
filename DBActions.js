@@ -1,26 +1,33 @@
-const { Pool, Client } = require('pg');
+const {
+    Pool,
+    Client
+} = require('pg');
 
-class DatabaseActions {
+module.exports = class DatabaseActions {
     constructor() {
         this.pool = new Pool();
         this.client = new Client({
             user: 'postgres',
             password: 'Password1',
-            host: '172.20.10.4:',
+            host: '172.20.10.4',
             port: '5432',
             database: 'Shotgun'
         })
+        this.client.connect();
     }
 
     GetConnection() {
-        return client.connect();
+        return this.client.connect();
     }
 
-    QueryData(query) {
-        let data = pool.query(query, (err, res) => {
-            console.log(err, res);
-            pool.end();
-        })
-        console.log(data);
+    async QueryData(query) {
+        // let conn = this.GetConnection();
+        let data;
+        await this.client.query(query)
+            .then((res) => {
+                console.log(res.rows);
+                data = res.rows;
+            });
+        return data;
     }
 }
