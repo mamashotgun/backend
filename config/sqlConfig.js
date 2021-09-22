@@ -14,9 +14,14 @@ const createReservationQuery = (place_id, course_id, start_time, end_time) =>
 const getCourseQuery = (course_id) =>
     `SELECT * FROM courses where course_id=${course_id}`;
 
+const createCourseQuery = (name, password, is_admin, display_name) =>
+    `INSERT INTO courses(name, password ,is_admin, display_name) VALUES ('${name}', '${password}', ${is_admin}, '${display_name}')`;
+
+
 module.exports = {
     conn_params,
     getReservationsQuery,
     getCourseQuery,
-    createReservationQuery
+    createReservationQuery,
+    createCourseQuery,
 };

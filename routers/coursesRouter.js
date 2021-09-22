@@ -1,24 +1,36 @@
 const express = require("express");
-const { getCoursesQuery, getCourseQuery } = require("../config/sqlConfig");
+const {
+    getCourseQuery,
+    createCourseQuery
+} = require("../config/sqlConfig");
 
 const createCourseRouter = (dbConnection) => {
-  const router = express.Router();
+    const router = express.Router();
 
-  router.get("/", async(req, res) => {
-    const course_id = req.query.course_id;
-    const courses = await dbConnection.QueryData(
-      getCourseQuery(course_id)
-    );
-    res.json(courses)
-  });
+    router.get("/", async (req, res) => {
+        const course_id = req.query.course_id;
+        const courses = await dbConnection.QueryData(
+            getCourseQuery(course_id)
+        );
+        res.json(courses)
+    });
 
-  router.post("/:id", (req, res) => {
-    res.json(res.courses);
-  });
+    router.post("/", async (req, res) => {
+        const {
+            name,
+            password,
+            is_admin, 
+            display_name
+        } = req.body;
+        await dbConnection.QueryData(
+            createCourseQuery(name, password, is_admin ,display_name)
+        );
+        res.status(201).send();
+    });
 
-  return router;
+    return router;
 };
 
 module.exports = {
-  createCourseRouter,
+    createCourseRouter,
 };
