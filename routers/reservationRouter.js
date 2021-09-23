@@ -59,6 +59,10 @@ const createReservationRouter = (dbConnection) => {
   router.post("/is_available", async (req, res) => {
     const { place_id, start_time, end_time } = req.body;
 
+    if (!place_id) {
+      res.status(400).json({ error: "No place id provided!" });
+    }
+
     res.send(await isTimeAvailable(place_id, start_time, end_time));
   });
 
