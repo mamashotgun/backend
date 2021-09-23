@@ -14,8 +14,10 @@ const createReservationRouter = (dbConnection) => {
   router.get("/", async (req, res) => {
     const place_id = req.query.place_id;
 
-    if (!place_id) {
-      res.status(400).json({ message: "No place id given!" });
+    if (!place_id || isNaN(place_id)) {
+      res
+        .status(400)
+        .json({ message: "No place id given or was not a number!" });
     } else {
       const reservations = await getReservationsByPlace(place_id);
       res.json(reservations);
