@@ -18,6 +18,29 @@ const createCourseRouter = (dbConnection) => {
     res.status(201).json(rows[0]);
   });
 
+  router.post("/login", async (req, res) => {
+    const { name, password } = req.body;
+
+    if (!name || !password) {
+      res.status(400).send("Invalid request");
+    } else {
+      const rows = await dbConnection.QueryData(
+        `SELECT * FROM courses WHERE name='${name}'`
+      );
+      if (rows.length > 0) {
+        const course = rows[0];
+
+        if (course.password === password) {
+          res.json(course);
+        } else {
+          res.status(403).send();
+        }
+      } else {
+        res.status(404).send();
+      }
+    }
+  });
+
   return router;
 };
 
