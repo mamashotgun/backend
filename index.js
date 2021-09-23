@@ -7,12 +7,15 @@ const coursesRouter = require("./routers/coursesRouter");
 const categoriesRouter = require("./routers/categoriesRouter");
 const placesRouter = require("./routers/placesRouter");
 const locationRouter = require("./routers/locationRouter");
+const logMiddleWare = require("./middleware/logger");
 
 const app = express();
 const dbConnection = new DB();
 
 app.use(express.json());
 app.use(cors());
+app.use(logMiddleWare);
+
 app.use(
   "/reservations",
   reservationRouter.createReservationRouter(dbConnection)
