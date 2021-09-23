@@ -28,10 +28,21 @@ const createReservationRouter = (dbConnection) => {
     return date >= from && date <= to;
   };
 
-  const isTimeAvailable = async (place_id, start_time, end_time) => {
-    const reservations = await getReservationsByPlace(place_id);
+  const isTimeAvailable = async (
+    place_id,
+    start_time,
+    end_time,
+    reservation_id
+  ) => {
+    let reservations = await getReservationsByPlace(place_id);
     const start_date = new Date(start_time);
     const end_date = new Date(end_time);
+
+    if (reservation_id) {
+      reservations = reservations.filter(
+        (reservation) => reservation.reservation_id != reservation_id
+      );
+    }
 
     const result = reservations.every((reservation) => {
       return !(
@@ -59,13 +70,15 @@ const createReservationRouter = (dbConnection) => {
   });
 
   router.post("/is_available", async (req, res) => {
-    const { place_id, start_time, end_time } = req.body;
+    const { reservation_id, place_id, start_time, end_time } = req.body;
 
-    if (!place_id) {
+    if (!place_id || !reservation_id) {
       res.status(400).json({ error: "No place id provided!" });
     }
 
-    res.send(await isTimeAvailable(place_id, start_time, end_time));
+    res.send(
+      await isTimeAvailable(place_id, start_time, end_time, reservation_id)
+    );
   });
 
   router.delete("/:id", async (req, res) => {
