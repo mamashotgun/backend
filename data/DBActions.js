@@ -17,10 +17,12 @@ module.exports = class DatabaseActions {
   }
 
   async QueryData(query) {
-    let data;
-    await this.client.query(query).then((res) => {
-      data = res.rows;
-    });
-    return data;
+    try {
+      const result = await this.client.query(query);
+      return result.rows;
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
   }
 };
